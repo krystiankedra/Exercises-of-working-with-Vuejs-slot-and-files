@@ -1,13 +1,11 @@
 <template>
   <v-container>
-    <div class="row mb-2">
-      <upload-file-wrapper :upload-handler="uploadFile">
-        <template v-slot:btn-name>
-          Upload Image
-        </template>
-      </upload-file-wrapper>
-    </div>
-    <files-wrapper :elements="images">
+    <upload-file-wrapper :upload-handler="uploadFile">
+      <template v-slot:btn-name>
+        Upload Image
+      </template>
+    </upload-file-wrapper>
+    <files-wrapper :elements="images" class="mt-3">
       <template v-slot:title>
         <h1 class="title">
           Images List
@@ -46,13 +44,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      addNewImageFromFile: ADD_NEW_IMAGE_FROM_FILE,
+      addNewImageFromFile: ADD_NEW_IMAGE_FROM_FILE
     }),
     ...mapMutations({
       deleteImage: DELETE_IMAGE
     }),
-    uploadFile(e) {
-      this.addNewImageFromFile(e.target.files[0])
+    uploadFile(file) {
+      this.addNewImageFromFile(file)
     },
     deleteElement(idx) {
       this.deleteImage(idx)

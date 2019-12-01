@@ -1,13 +1,11 @@
 <template>
   <v-container>
-    <div class="row mb-2">
-      <upload-file-wrapper :upload-handler="uploadFile">
-        <template v-slot:btnName>
-          Upload File
-        </template>
-      </upload-file-wrapper>
-    </div>
-    <files-wrapper :elements="posts">
+    <upload-file-wrapper :upload-handler="uploadFile">
+      <template v-slot:btn-name>
+        Upload File
+      </template>
+    </upload-file-wrapper>
+    <files-wrapper :elements="posts" class="mt-3">
       <template v-slot:title>
         <h1 class="title">
           Posts List
@@ -44,8 +42,8 @@ export default {
     ...mapActions({
       addNewPostFromFile: ADD_NEW_POST_FROM_FILE
     }),
-    uploadFile(e) {
-      this.addNewPostFromFile(e.target.files[0])
+    uploadFile(file) {
+      this.addNewPostFromFile(file)
     }
   }
 }
