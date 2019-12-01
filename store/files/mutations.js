@@ -4,5 +4,8 @@ export default {
   },
   addNewImageFromFile(state, payload) {
     state.images = [...state.images, payload]
+  },
+  deleteImage(state, payload) {
+    state.images = state.images.filter((_, idx) => idx !== payload)
   }
 }

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <v-content>
     <slot name="title">
       Title no provided
     </slot>
-    <v-card v-for="(element, index) in elements" :key="index" class="col-12">
+    <v-card v-for="(element, index) in elements" :key="index">
       <v-card-title class="blue darken-2 white--text">
         <slot name="header" :item="{ name: element.name, index }">
           Header no provided
@@ -14,8 +14,11 @@
           Content no provided
         </slot>
       </v-card-text>
+      <v-card-actions>
+        <slot name="btn-delete" :index="index" />
+      </v-card-actions>
     </v-card>
-  </div>
+  </v-content>
 </template>
 
 <script>

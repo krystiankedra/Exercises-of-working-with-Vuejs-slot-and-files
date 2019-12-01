@@ -1,7 +1,11 @@
 <template>
-  <v-container p-2>
+  <v-container>
     <div class="row mb-2">
-      <upload-file-wrapper :upload-handler="uploadFile" />
+      <upload-file-wrapper :upload-handler="uploadFile">
+        <template v-slot:btnName>
+          Upload File
+        </template>
+      </upload-file-wrapper>
     </div>
     <files-wrapper :elements="posts">
       <template v-slot:title>
@@ -13,15 +17,17 @@
         {{ `File - ${index + 1}. ${name}` }}
       </template>
       <template v-slot:content="{ item: { content } }">
-        {{ content }}
+        <span>
+          {{ content }}
+        </span>
       </template>
     </files-wrapper>
   </v-container>
 </template>
 
 <script>
-const uploadFileWrapper = () => import('~/components/shared/UploadFileWrapper/uploadFileWrapper')
-const filesWrapper = () => import('~/components/FilesWrapper/filesWrapper')
+const uploadFileWrapper = () => import('~/components/Shared/UploadFileWrapper/uploadFileWrapper')
+const filesWrapper = () => import('~/components/Shared/FilesWrapper/filesWrapper')
 import { ADD_NEW_POST_FROM_FILE } from '~/store/actionTypes'
 import { mapGetters, mapActions } from 'vuex'
 export default {

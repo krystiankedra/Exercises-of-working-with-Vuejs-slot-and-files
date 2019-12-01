@@ -1,7 +1,11 @@
 <template>
-  <v-container p-2>
+  <v-container>
     <div class="row mb-2">
-      <upload-file-wrapper :upload-handler="uploadFile" />
+      <upload-file-wrapper :upload-handler="uploadFile">
+        <template v-slot:btn-name>
+          Upload Image
+        </template>
+      </upload-file-wrapper>
     </div>
     <files-wrapper :elements="images">
       <template v-slot:title>
@@ -15,15 +19,21 @@
       <template v-slot:content="{ item: { content } }">
         <img :src="content" />
       </template>
+      <template v-slot:btn-delete="{ index }">
+        <v-btn @click="() => deleteElement(index)" class="cancel-button">
+          Delete File
+        </v-btn>
+      </template>
     </files-wrapper>
   </v-container>
 </template>
 
 <script>
-const uploadFileWrapper = () => import('~/components/shared/UploadFileWrapper/uploadFileWrapper')
-const filesWrapper = () => import('~/components/FilesWrapper/filesWrapper')
-import { ADD_NEW_IMAGE_FROM_FILE } from '~/store/actionTypes'
-import { mapGetters, mapActions } from 'vuex'
+const uploadFileWrapper = () => import('~/components/Shared/UploadFileWrapper/uploadFileWrapper')
+const filesWrapper = () => import('~/components/Shared/FilesWrapper/filesWrapper')
+import { ADD_NEW_IMAGE_FROM_FILE, REMOVE_IMAGE } from '~/store/actionTypes'
+import { DELETE_IMAGE } from '~/store/mutationTypes'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
   components: {
     uploadFileWrapper,
@@ -36,10 +46,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      addNewImageFromFile: ADD_NEW_IMAGE_FROM_FILE
+      addNewImageFromFile: ADD_NEW_IMAGE_FROM_FILE,
+    }),
+    ...mapMutations({
+      deleteImage: DELETE_IMAGE
     }),
     uploadFile(e) {
       this.addNewImageFromFile(e.target.files[0])
+    },
+    deleteElement(idx) {
+      this.deleteImage(idx)
     }
   }
 }
