@@ -1,20 +1,20 @@
 <template>
   <v-container>
     <upload-file-wrapper :upload-handler="uploadFile">
-      <template v-slot:btn-name>
+      <template #btn-name>
         Upload File
       </template>
     </upload-file-wrapper>
     <files-wrapper :elements="posts" class="mt-3">
-      <template v-slot:title>
+      <template #title>
         <h1 class="title">
           Posts List
         </h1>
       </template>
-      <template v-slot:header="{ item: { name, index } }">
+      <template #header="{ item: { name, index } }">
         {{ `File - ${index + 1}. ${name}` }}
       </template>
-      <template v-slot:content="{ item: { content } }">
+      <template #content="{ item: { content } }">
         <span>
           {{ content }}
         </span>

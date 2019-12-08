@@ -1,23 +1,23 @@
 <template>
   <v-container>
     <upload-file-wrapper :upload-handler="uploadFile">
-      <template v-slot:btn-name>
+      <template #btn-name>
         Upload Image
       </template>
     </upload-file-wrapper>
     <files-wrapper :elements="images" class="mt-3">
-      <template v-slot:title>
+      <template #title>
         <h1 class="title">
           Images List
         </h1>
       </template>
-      <template v-slot:header="{ item: { name, index } }">
+      <template #header="{ item: { name, index } }">
         {{ `Img - ${index + 1}. ${name}` }}
       </template>
-      <template v-slot:content="{ item: { content } }">
+      <template #content="{ item: { content } }">
         <img :src="content" />
       </template>
-      <template v-slot:btn-delete="{ index }">
+      <template #btn-delete="{ index }">
         <v-btn @click="() => deleteElement(index)" class="cancel-button">
           Delete File
         </v-btn>
