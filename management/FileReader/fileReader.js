@@ -1,10 +1,10 @@
-const convertDataToType = (file, callBack) => {
+const convertDataToType = (file, callback) => {
   const reader = new FileReader()
   return new Promise((resolve) => {
     reader.onload = () => {
       resolve(reader.result)
     }
-    callBack(reader, file)
+    callback(reader, file)
   })
 }
 
